@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChakraProvider } from './contexts/ChakraProvider';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { AppShell } from './components/layout/AppShell';
@@ -34,8 +34,10 @@ function getTitle(path: string): string {
 }
 
 function AppContent() {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, user } = useAuth();
     const [currentPath, setCurrentPath] = useState('/dashboard');
+    const prevUserId = useRef<string | undefined>(undefined);
+    const isInitialMount = useRef(true);
 
     useEffect(() => {
         const handlePopState = () => setCurrentPath(window.location.pathname);
@@ -43,6 +45,20 @@ function AppContent() {
         setCurrentPath(window.location.pathname);
         return () => window.removeEventListener('popstate', handlePopState);
     }, []);
+
+    useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+            prevUserId.current = user?.id;
+            return;
+        }
+
+        if (isAuthenticated && user?.id && prevUserId.current !== user.id) {
+            setCurrentPath('/dashboard');
+            window.history.pushState(null, '', '/dashboard');
+        }
+        prevUserId.current = user?.id;
+    }, [user?.id, isAuthenticated]);
 
     const navigate = (path: string) => {
         window.history.pushState(null, '', path);
