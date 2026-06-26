@@ -4,7 +4,7 @@ export const NAV_ITEMS: Record<UserRole, { label: string; path: string; icon: st
     head_of_hr: [
         { label: 'Dashboard', path: '/dashboard', icon: 'dashboard' },
         { label: 'Employees', path: '/employees', icon: 'people' },
-        { label: 'Vacations', path: '/vacations', icon: 'calendar' },
+        { label: 'Vacations', path: '/vacations', icon: 'calendar_month' },
         { label: 'Salary', path: '/salary', icon: 'payments' },
         { label: 'Accounting', path: '/accounting', icon: 'account_balance' },
         { label: 'Recruitment', path: '/recruitment', icon: 'person_search' },
@@ -15,7 +15,7 @@ export const NAV_ITEMS: Record<UserRole, { label: string; path: string; icon: st
     hr: [
         { label: 'Dashboard', path: '/dashboard', icon: 'dashboard' },
         { label: 'Employees', path: '/employees', icon: 'people' },
-        { label: 'Vacations', path: '/vacations', icon: 'calendar' },
+        { label: 'Vacations', path: '/vacations', icon: 'calendar_month' },
         { label: 'Salary', path: '/salary', icon: 'payments' },
         { label: 'Analytics', path: '/analytics', icon: 'analytics' },
         { label: 'Settings', path: '/settings', icon: 'settings' },
